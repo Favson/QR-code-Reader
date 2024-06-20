@@ -3,73 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code Reader</title>
-    <style>
-        #video {
-            width: 100%;
-            height: auto;
-        }
-        #canvas {
-            display: none;
-        }
-        #output {
-            margin-top: 20px;
-        }
-    </style>
+    <title>Course Registration</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>QR Code Reader</h1>
-    <video id="video" autoplay></video>
-    <canvas id="canvas"></canvas>
-    <div id="output">
-        <p>Scanned QR Code Data:</p>
-        <p id="qrResult"></p>
+    <div class="container">
+        <h1>Course Registration</h1>
+        <form id="registrationForm">
+            <label><input type="checkbox" name="course" value="CYB101 - 2 units"> CYB101 - 2 units</label><br>
+            <label><input type="checkbox" name="course" value="CYB103 - 2 units"> CYB103 - 2 units</label><br>
+            <label><input type="checkbox" name="course" value="PHY101 - 2 units"> PHY101 - 2 units</label><br>
+            <label><input type="checkbox" name="course" value="MTH101 - 2 units"> MTH101 - 2 units</label><br>
+            <label><input type="checkbox" name="course" value="GST111 - 2 units"> GST111 - 2 units</label><br>
+            <label><input type="checkbox" name="course" value="COS101 - 3 units"> COS101 - 3 units</label><br>
+            <label><input type="checkbox" name="course" value="LIB101 - 1 unit"> LIB101 - 1 unit</label><br>
+            <label><input type="checkbox" name="course" value="PHY107 - 1 unit"> PHY107 - 1 unit</label><br>
+            <label><input type="checkbox" name="course" value="STA111 - 3 units"> STA111 - 3 units</label><br>
+            <button type="button" onclick="registerCourses()">Register Courses</button>
+        </form>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
-    <script>
-        const video = document.getElementById('video');
-        const canvas = document.getElementById('canvas');
-        const context = canvas.getContext('2d');
-        const output = document.getElementById('qrResult');
-
-        // Access the device camera and stream to video element
-        navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }).then(function(stream) {
-            video.srcObject = stream;
-            video.setAttribute("playsinline", true); // required to tell iOS safari we don't want fullscreen
-            video.play();
-            requestAnimationFrame(tick);
-        });
-
-        function tick() {
-            if (video.readyState === video.HAVE_ENOUGH_DATA) {
-                canvas.height = video.videoHeight;
-                canvas.width = video.videoWidth;
-                context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                const imageData = context.getImageData(0, 0, canvas.width, canvas.height);
-                const code = jsQR(imageData.data, imageData.width, imageData.height, {
-                    inversionAttempts: 'dontInvert',
-                });
-
-                if (code) {
-                    drawLine(context, code.location.topLeftCorner, code.location.topRightCorner, "#FF3B58");
-                    drawLine(context, code.location.topRightCorner, code.location.bottomRightCorner, "#FF3B58");
-                    drawLine(context, code.location.bottomRightCorner, code.location.bottomLeftCorner, "#FF3B58");
-                    drawLine(context, code.location.bottomLeftCorner, code.location.topLeftCorner, "#FF3B58");
-                    output.innerText = code.data;
-                }
-            }
-            requestAnimationFrame(tick);
-        }
-
-        function drawLine(context, begin, end, color) {
-            context.beginPath();
-            context.moveTo(begin.x, begin.y);
-            context.lineTo(end.x, end.y);
-            context.lineWidth = 4;
-            context.strokeStyle = color;
-            context.stroke();
-        }
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
