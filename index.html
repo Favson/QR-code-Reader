@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Email Generator</title>
+</head>
+<body>
+    <button id="generateEmailButton">Generate Fake Email</button>
+    <p id="fakeEmailDisplay"></p>
+
+    <script>
+        // Function to generate a random string
+        function generateRandomString(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        // Function to generate a fake email
+        function generateFakeEmail() {
+            const usernameLength = 10;  // Length of the random part of the email
+            const username = generateRandomString(usernameLength);
+            const domain = '@lautech.com';
+            return username + domain;
+        }
+
+        // Function to handle button click event
+        function onButtonClick() {
+            const fakeEmail = generateFakeEmail();
+            document.getElementById('fakeEmailDisplay').textContent = fakeEmail;
+        }
+
+        // Add event listener to the button
+        document.getElementById('generateEmailButton').addEventListener('click', onButtonClick);
+    </script>
+</body>
+</html>
