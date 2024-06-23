@@ -15,8 +15,6 @@ checkboxes.forEach(checkbox => {
 
 let studentMatric =[2023008625, 2023007271, 2023006202, 2023007238, 2023002857,2023008028, 2023010703, 2023004212, 2023002427, 2023002524, 2023010465, 2023011681, 2023003139, 2023008891, 2023008239, 2023011299, 2023004947, 2023005814]
 let UserArray=[]
-
-
 function registerCourses() {
     let inputName = document.getElementById('inputName').value;
     let matricNumber = document.getElementById("matricNumber").value;
